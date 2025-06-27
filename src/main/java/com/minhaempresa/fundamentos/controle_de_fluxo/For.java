@@ -1,9 +1,6 @@
 package com.minhaempresa.fundamentos.controle_de_fluxo;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class For {
@@ -16,6 +13,23 @@ public class For {
                 "Lucas", new Estudante("Lucas", 19, 40, 'M')
         );
 
+        Estudante[] estudantes = {
+                new Estudante("Ana", 18, 85, 'F'),
+                new Estudante("Carlos", 20, 55, 'M'),
+                new Estudante("Bruna", 22, 70, 'F'),
+                new Estudante("Lucas", 19, 40, 'M')
+        };
+
+        boolean[][] diasVindos = {
+                {true, true, true, false, true},    // Ana
+                {true, false, true, false, false},  // Carlos
+                {true, true, true, true, true},     // Bruna
+                {false, false, true, false, false}  // Lucas
+        };
+
+        diasPresentes(estudantes, gerarPresenca(4, 200));
+
+
         Map<String, List<Estudante>> agrupados = organizarEstudantesPelaSituacao(mapaEstudantes);
         System.out.println(organizarEstudantesPelaSituacaoString(mapaEstudantes.values().toArray(new Estudante[0])));
         /*
@@ -24,8 +38,9 @@ public class For {
             lista.forEach(est -> System.out.println(" - Nome: " + est.getNome() + ", Nota: " + est.getNota()));
         });*/
     }
+
     /* Usando Map */
-    public static Map<String, List<Estudante>> organizarEstudantesPelaSituacao(Map<String , Estudante> estudantes) {
+    public static Map<String, List<Estudante>> organizarEstudantesPelaSituacao(Map<String, Estudante> estudantes) {
         return estudantes.values()
                 .stream()
                 .collect(Collectors.groupingBy(est -> est.getNota() >= 60 ? "Aprovado" : "Reprovado"));
@@ -52,9 +67,38 @@ public class For {
         return estudantesAprovados.toString() + estudantesReprovados.toString();
     }
 
-}
+    public static boolean[][] gerarPresenca(int totalEstudante, int totalDias) {
+        Random random = new Random();
+        boolean[][] presenca = new boolean[totalEstudante][totalDias];
+        for (int i = 0; i < totalEstudante; i++) {
+            for (int j = 0; j < totalDias; j++) {
+                presenca[i][j] = random.nextDouble() < 0.8;
+            }
+        }
+        return presenca;
+    }
 
- class Estudante {
+    public static void diasPresentes(Estudante[] estudantes, boolean[][] diasVindos) {
+        for (int i = 0; i < estudantes.length; i++) {
+            int presencas = 0;
+            for (int j = 0; j < diasVindos[i].length; j++) {
+                if (diasVindos[i][j]) presencas++;
+            }
+            String color = " ";
+            double percentual = 100.0 * presencas / diasVindos[i].length;
+            if (percentual <= 75){
+                color = "\u001B[31m";
+            }else{
+                color = "\u001B[32m";
+            }
+            System.out.printf("Estudante: %-10s | Presenças: %s %3d/%d (%.2f%%)%n %s",
+                    estudantes[i].getNome(), color ,presencas, diasVindos[i].length , percentual,"\u001B[0m");
+        }
+
+
+    }
+}
+    class Estudante {
     private UUID uuid;
     private String nome;
     private int idade;
@@ -96,3 +140,4 @@ public class For {
     }
 
 }
+
