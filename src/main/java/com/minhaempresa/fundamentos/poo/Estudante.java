@@ -20,6 +20,9 @@ public class Estudante {
         this.matricula = matricula;
         this.notas = new ArrayList<>();
     }
+    public Estudante cloneFrom(Estudante estudante){
+        return  new Estudante(estudante.getNome(), estudante.getEmail(), estudante.getMatricula());
+    }
     public Estudante(){}
 
     public UUID getUuid() {

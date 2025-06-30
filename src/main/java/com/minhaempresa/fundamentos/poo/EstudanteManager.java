@@ -24,20 +24,25 @@ public class EstudanteManager implements Gerenciavel<Estudante> {
     public List<Estudante> buscarTodos() {
         return new ArrayList<>(estudantes.values());
     }
-
-
     @Override
     public void deletarPeloId(UUID uuid) {
-        this.estudantes.entrySet().removeIf(entry -> entry.getKey().equals(uuid));
+            this.estudantes.entrySet().removeIf(entry -> entry.getKey().equals(uuid));
     }
 
     @Override
-    public void alterarPeloId(UUID uuid) {
-
+    public void alterarPeloId(UUID uuid, Estudante novoEstudante) {
+        this.estudantes.entrySet().stream()
+                .filter(entry -> entry.getValue().getUuid().equals(uuid))
+                .findFirst()
+                .ifPresent(entry -> {
+                    novoEstudante.setUuid(uuid);
+                    this.estudantes.put(entry.getKey(), novoEstudante);
+                });
     }
+
 
     @Override
     public void salvarPeloId(Estudante estudante) {
-
+        this.estudantes.put(estudante.getUuid(),estudante);
     }
 }
