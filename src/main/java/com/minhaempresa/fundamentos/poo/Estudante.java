@@ -62,6 +62,25 @@ public class Estudante {
     }
 
     public void setNotas(List<Double> notas) {
+        if (notas.size() != 4){
+            System.out.println("As notas são dividias em 4 pesos");
+            return;
+        }
         this.notas = notas;
     }
+    public double calcularMediaAluno() {
+        return this.notas.stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0);
+    }
+    public double calcularMediaAlunoSemStream() {
+        double soma = 0;
+        for (double nota : this.notas) {
+            soma += nota;
+        }
+       return  this.notas.isEmpty() ? 0 : soma / this.notas.size();
+
+    }
+
 }
