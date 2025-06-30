@@ -82,5 +82,10 @@ public class Estudante {
        return  this.notas.isEmpty() ? 0 : soma / this.notas.size();
 
     }
+    @Override
+    public String toString() {
+        return String.format("Estudante: %s | Matrícula: %s | Email: %s | Média: %.2f",
+                nome, matricula, email, calcularMediaAluno());
+    }
 
 }
