@@ -1,6 +1,6 @@
 package com.minhaempresa.fundamentos.poo;
 
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Util {
@@ -37,5 +37,13 @@ public class Util {
             acao.accept(entidade);
         }
     }
-
+    public static <T extends Comparable<T>> List<T>lista(List<T> entidade ,int quantidade){
+        if(entidade.size()<quantidade){
+            System.out.println("A lista está inferior a quantidade desejada");
+            return  entidade;
+        }
+        List<T> arrayOrdenado = new  ArrayList<>(entidade);
+        Collections.sort(arrayOrdenado);
+        return arrayOrdenado.subList(0,quantidade);
+    }
 }
