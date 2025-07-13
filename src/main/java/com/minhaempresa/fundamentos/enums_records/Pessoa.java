@@ -9,7 +9,6 @@ public record Pessoa(String nome , int idade) {
             throw  new IllegalArgumentException("idade não pode ser nulo ou menor a zero ");
         }
     }
-
     public Pessoa(int idade){this("ANONIMO",idade);}
 
 }
