@@ -1,26 +1,7 @@
 package com.minhaempresa.colecoes_generics.list_set_map.map;
-/**
- * 6. Produto Mais Caro:
- * Dado um Map com produtos e seus preços, exiba qual produto tem o maior valor.
- */
-/**
- * 7. Soma dos Valores:
- * Dado um Map com valores numéricos, calcule a soma de todos os valores.
- */
-/**
- * 8. Agrupar Pessoas por Faixa Etária:
- * Dado um Map com nomes e idades, agrupe os nomes em três faixas: Jovem (0–17), Adulto (18–59), Idoso (60+).
- */
-/**
- * 9. Inverter Mapa:
- * Dado um Map<String, Integer>, crie um novo Map<Integer, List<String>> agrupando as chaves com o mesmo valor.
- */
 
-import java.awt.image.ImageProducer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +16,10 @@ public class ExercicioMap {
         dicionarioPortuguesParaIngles();
         mediaNotaAluno();
         quantidadeDeCaracteres("Palavra");
+        produtoMaisCaro();
+        somaValores();
+        agruparPessoasPelaFaixaEtaria();
+        palavrasMaisFrequentes();
     }
     /**
      *  1. Contagem de Palavras:
@@ -106,10 +91,150 @@ public class ExercicioMap {
 
     public static void quantidadeDeCaracteres(String palavra){
         Map<Character,Integer> quantidadeDeCaracteres = new HashMap<>();
+        System.out.println("5. Frequência de Caracteres:");
         for (Character c :palavra.toCharArray()){
             quantidadeDeCaracteres.put(c,quantidadeDeCaracteres.getOrDefault(c,0) +1);
         }
         quantidadeDeCaracteres.forEach((k, v) -> System.out.println(k + ": " + v));
 
     }
+    /**
+     * 6. Produto Mais Caro:
+     * Dado um Map com produtos e seus preços, exiba qual produto tem o maior valor.
+     */
+    public static void produtoMaisCaro(){
+        System.out.println("6. Produto Mais Caro");
+        Map<String,Double> produtos = new HashMap<>();
+
+        produtos.put("Maçã",20d);
+        produtos.put("Caneta",2.5d);
+        produtos.put("Panela",30d);
+        produtos.put("Arroz",29.99d);
+        produtos.put("Caldo",100.00d);
+        produtos.put("Feijão",29.99d);
+        produtos.put("Sabonete",29.99d);
+        produtos.put("Legumes",29.99d);
+        double maiorPreco = 0d;
+        String produtoComMaiorPreco = " ";
+        for(Map.Entry<String,Double> produto : produtos.entrySet() ){
+
+           if(produto.getValue()>maiorPreco){
+               maiorPreco = produto.getValue();
+               produtoComMaiorPreco = produto.getKey();
+           }
+
+        }
+        System.out.println(" O Produto de maior valor é :"+ produtoComMaiorPreco +" com o valor de : R$ "+maiorPreco);
+    }
+    /**
+     * 7. Soma dos Valores:
+     * Dado um Map com valores numéricos, calcule a soma de todos os valores.
+     */
+    public static void somaValores(){
+        System.out.println("7. Soma dos Valores");
+        Map<String , Integer> peoples = new HashMap<>();
+        peoples.put("Jairo",27);
+        peoples.put("Jonas",30);
+        peoples.put("Maria",16);
+        peoples.put("Manuel",40);
+        peoples.put("Mathias",32);
+        int somatoriaDeIdades = 0;
+        for (Map.Entry<String , Integer> people : peoples.entrySet() ){
+            somatoriaDeIdades = somatoriaDeIdades + people.getValue();
+        }
+        System.out.println("A somatoria de idade das "+peoples.size()+"  pessoas é de "+somatoriaDeIdades);
+    }
+    /**
+     * 8. Agrupar Pessoas por Faixa Etária:
+     * Dado um Map com nomes e idades, agrupe os nomes em três faixas: Jovem (0–17), Adulto (18–59), Idoso (60+).
+     */
+    public static void agruparPessoasPelaFaixaEtaria(){
+        Map<String,Map<String,Integer>> agrupar = new HashMap<>();
+        Map<String , Integer> pessoas = new HashMap<>();
+        pessoas.put("Jairo",27);
+        pessoas.put("Jonas",10);
+        pessoas.put("Maria",16);
+        pessoas.put("Manuel",30);
+        pessoas.put("Paulo",40);
+        pessoas.put("Augusto",12);
+        pessoas.put("João",23);
+
+        for (Map.Entry<String,Integer> pessoa: pessoas.entrySet()){
+            Integer idadeAtual = pessoa.getValue();
+            String status = "";
+
+            if (idadeAtual >0 && idadeAtual <= 17 ){
+                status =" Jovem";
+            } else if (idadeAtual >=18 && idadeAtual <= 59 ){
+                status = "Adulto";
+            }else if (idadeAtual > 59 ){
+                status = "Velho";
+            }else {
+                System.out.println("Idade nao pode ser nulo");
+            }
+            agrupar.putIfAbsent(status,new HashMap<>());
+            agrupar.get(status).put(pessoa.getKey(),pessoa.getValue() );
+
+        }
+        System.out.println(agrupar);
+    }
+    /**
+     * 9. Inverter Mapa:
+     * Dado um Map<String, Integer>,
+     * crie um novo Map<Integer, List<String>> agrupando as chaves com o mesmo valor.
+     */
+    public static void inverterMap() {
+        Map<String, Integer> mapaOriginal = new HashMap<>();
+        mapaOriginal.put("a", 1);
+        mapaOriginal.put("b", 2);
+        mapaOriginal.put("c", 1);
+        mapaOriginal.put("d", 3);
+        Map<Integer, List<String>> mapAgrupado = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : mapaOriginal.entrySet()) {
+            String keyOriginal = entry.getKey();
+            Integer valor = entry.getValue();
+            mapAgrupado.computeIfAbsent(valor, k -> new ArrayList<>()).add(keyOriginal);
+        }
+        for (Map.Entry<Integer, List<String>> entry : mapAgrupado.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+    /**
+     * 10. Top 3 Palavras Mais Frequentes:
+     * Dada uma lista de palavras, exiba as 3 palavras mais frequentes e suas contagens.
+     */
+    /**
+     * 10. Top 3 Palavras Mais Frequentes:
+     * Dada uma lista de palavras, exiba as 3 palavras mais frequentes e suas contagens.
+     */
+    public static void palavrasMaisFrequentes() {
+        final int limit = 3;
+        Map<String, Integer> contagemDePalavras = new HashMap<>();
+
+               List<String> palavras = Arrays.asList(
+                "java", "c", "java", "python", "java", "python", "c", "c", "c", "go"
+        );
+
+        for (String palavra : palavras) {
+            if (contagemDePalavras.containsKey(palavra)) {
+                contagemDePalavras.put(palavra, contagemDePalavras.get(palavra) + 1);
+            } else {
+                contagemDePalavras.put(palavra, 1);
+            }
+        }
+
+        List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(contagemDePalavras.entrySet());
+        Collections.sort(listaOrdenada, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) {
+                return e2.getValue() - e1.getValue();
+            }
+        });
+        System.out.println("Top " + limit + " palavras mais frequentes:");
+        for (int i = 0; i < limit && i < listaOrdenada.size(); i++) {
+            Map.Entry<String, Integer> entrada = listaOrdenada.get(i);
+            System.out.println(entrada.getKey() + " -> " + entrada.getValue());
+        }
+    }
+
 }
