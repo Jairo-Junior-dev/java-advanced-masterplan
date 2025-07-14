@@ -203,10 +203,6 @@ public class ExercicioMap {
      * 10. Top 3 Palavras Mais Frequentes:
      * Dada uma lista de palavras, exiba as 3 palavras mais frequentes e suas contagens.
      */
-    /**
-     * 10. Top 3 Palavras Mais Frequentes:
-     * Dada uma lista de palavras, exiba as 3 palavras mais frequentes e suas contagens.
-     */
     public static void palavrasMaisFrequentes() {
         final int limit = 3;
         Map<String, Integer> contagemDePalavras = new HashMap<>();
