@@ -1,14 +1,19 @@
-package com.minhaempresa.fundamentos.enums_records;
+    package com.minhaempresa.fundamentos.enums_records;
 
-public record Pessoa(String nome , int idade) {
+    import java.time.LocalDate;
+    import java.util.UUID;
 
-    public Pessoa{
-        if (nome == null){
-            throw  new IllegalArgumentException("Nome não pode ser nulo");
-        }if (idade <= 0){
-            throw  new IllegalArgumentException("idade não pode ser nulo ou menor a zero ");
+    public record Pessoa(String nome, UUID id, LocalDate dataDeNacimento) {
+
+        public Pessoa {
+            if (nome == null) {
+                throw new IllegalArgumentException("Nome não pode ser nulo");
+            }
+            if (id == null) {
+                throw new IllegalArgumentException("ID não pode ser nulo");
+            }
+            if (dataDeNacimento == null) {
+                throw new IllegalArgumentException("Data de nascimento não pode ser nula");
+            }
         }
     }
-    public Pessoa(int idade){this("ANONIMO",idade);}
-
-}
