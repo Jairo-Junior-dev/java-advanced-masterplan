@@ -35,7 +35,6 @@ public  class RegisterPessoa implements RegistravelPessoa{
     public List<Pessoa> buscarPessoaEntreNotas(Double nota1, Double nota2) {
         return List.of();
     }
-
     @Override
     public void salvar(Pessoa pessoa) {
         pessoaMap.put(pessoa.id(), pessoa);
@@ -43,21 +42,24 @@ public  class RegisterPessoa implements RegistravelPessoa{
 
     @Override
     public Pessoa buscarPeloId(UUID uuid) {
-        return null;
+        return pessoaMap.get(uuid);
     }
 
     @Override
-    public void updatePeloId(Pessoa T) {
-
+    public void updatePeloId(Pessoa pessoa, UUID uuid) {
+        Pessoa atualizada = new Pessoa(pessoa.nome(), uuid, pessoa.dataDeNacimento());
+        pessoaMap.put(uuid, atualizada);
     }
 
     @Override
     public void deletaPeloId(UUID uuid) {
-
+        pessoaMap.remove(uuid);
     }
 
     @Override
-    public List<Pessoa> buscarTodos(Pessoa T) {
-        return List.of();
+    public List<Pessoa> buscarTodos() {
+        return new ArrayList<>(pessoaMap.values());
     }
+
+
 }

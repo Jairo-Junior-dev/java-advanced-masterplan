@@ -1,3 +1,4 @@
+
 package com.minhaempresa.colecoes_generics.list_set_map.map;
 import com.minhaempresa.colecoes_generics.generics.RegisterPessoa;
 import com.minhaempresa.fundamentos.enums_records.Pessoa;
@@ -24,7 +25,6 @@ public class TestePessoa {
         LocalDate fim = LocalDate.of(1997, 12, 31);
 
         List<Pessoa> pessoasFiltradas = register.buscarPessoaEntreData(inicio, fim);
-
         System.out.println("Pessoas entre " + inicio + " e " + fim + ":");
         for (Pessoa p : pessoasFiltradas) {
             System.out.println(p.nome() + " - " + p.dataDeNacimento());

@@ -7,9 +7,9 @@ public interface Registravel<T,I> {
 
     T buscarPeloId (I i);
 
-    void updatePeloId(T T);
+    void updatePeloId(T T , I i);
 
     void deletaPeloId(I i);
 
-    List<T> buscarTodos(T T);
+    List<T> buscarTodos();
 }
