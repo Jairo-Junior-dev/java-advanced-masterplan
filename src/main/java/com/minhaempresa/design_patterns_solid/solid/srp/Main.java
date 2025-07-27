@@ -11,6 +11,6 @@ public class Main {
         calculoSalario.calcularSalario(funcionario);
         //classe que tem coo objetivo mostrar as informações do usuario.
         UIFuncionario uiFuncionario = new UIFuncionario();
-        uiFuncionario.mostrarInfor(funcionario);
+     //   uiFuncionario.mostrarInfor(funcionario);
     }
 }
