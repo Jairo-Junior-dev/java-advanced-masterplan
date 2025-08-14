@@ -5,8 +5,8 @@ public class Main {
 
 
     Pessoa p = new Pessoa();
-        p.setNome("João");
-        p.setEmail("joao@email.com");
+        p.setNome("Jairo");
+        p.setEmail("Jairo@email.com");
         p.setPassword("12345");
         p.setIdade(22);
 
