@@ -1,0 +1,6 @@
+[
+  { "tipo": "Televisao", "nome": "TV 4K Samsung", "preco": 3500.00 },
+  { "tipo": "Televisao", "nome": "TV Full HD LG", "preco": 2500.00 },
+  { "tipo": "Radio", "nome": "Rádio Philco AM/FM", "preco": 180.00 },
+  { "tipo": "Geladeira", "nome": "Geladeira Frost Free Brastemp", "preco": 2800.00 }
+]
