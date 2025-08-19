@@ -10,6 +10,7 @@ public class Pipeline {
         steps.add(step);
     }
     public boolean execute(Pessoa pessoa) {
+
         for (Step step : steps) {
             if (!step.validar(pessoa)) {
                 return false;

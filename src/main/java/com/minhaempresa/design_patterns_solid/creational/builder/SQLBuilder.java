@@ -17,7 +17,7 @@ public class SQLBuilder {
         for (int i = 0; i < columns.length; i++){
             sql.append(columns[i]);
             if (i < columns.length - 1){
-                sql.append(", ");
+                sql.append(" , ");
             }
         }
         return this;
